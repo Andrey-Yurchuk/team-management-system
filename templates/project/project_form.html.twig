@@ -1,0 +1,73 @@
+{# templates/project/project_form.html.twig #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ form.vars.value.id ? 'Edit Project' : 'Create New Project' }}</title>
+    <link rel="stylesheet" href="{{ asset('css/style_developer_form.css') }}">
+</head>
+<body>
+
+{% for label, messages in app.flashes %}
+    <div class="flash-message {{ label }}">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+<h1>{{ form.vars.value.id ? 'Edit Project' : 'Create New Project' }}</h1>
+
+{{ form_start(form) }}
+
+{% if form.vars.errors|length > 0 %}
+    <div class="form-errors">
+        <ul>
+            {% for error in form.vars.errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<div class="form-group">
+    <label for="name">Project Name</label>
+    {{ form_widget(form.name) }}
+    {{ form_errors(form.name) }}
+</div>
+
+<div class="form-group">
+    <label for="client">Client</label>
+    {{ form_widget(form.client) }}
+    {{ form_errors(form.client) }}
+</div>
+
+<div class="form-group">
+    <label for="startDate">Start Date</label>
+    {{ form_widget(form.startDate) }}
+    {{ form_errors(form.startDate) }}
+</div>
+
+<div class="form-group">
+    <label for="endDate">End Date</label>
+    {{ form_widget(form.endDate) }}
+    {{ form_errors(form.endDate) }}
+</div>
+
+<div class="form-group">
+    <label for="isActive">Is Active</label>
+    <div class="radio-group">
+        {{ form_widget(form.isActive) }}
+        {{ form_errors(form.isActive) }}
+    </div>
+</div>
+
+<button type="submit">{{ form.vars.value.id ? 'Save Changes' : 'Create Project' }}</button>
+
+{{ form_end(form) }}
+
+<a href="{{ path('projects_list') }}">See Project List</a>
+
+</body>
+</html>

@@ -7,7 +7,7 @@ SELECT COUNT(*) AS total_developers
 FROM developer;
 
 -- Запрос для вычисления среднего возраста сотрудников
-SELECT ROUND(AVG(DATEDIFF(CURDATE(), birth_date) / 365), 1) AS average_age
+SELECT ROUND(AVG(DATE_PART('year', AGE(birth_date))), 1) AS average_age
 FROM developer
 WHERE birth_date IS NOT NULL;
 
